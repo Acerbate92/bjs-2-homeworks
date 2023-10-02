@@ -17,21 +17,12 @@ function solveEquation(a, b, c) {
 }
 
 
-function calculateTotalMortgage(percent, contribution, amount, date) {
-   let totalAmount;
-		if (isNaN(percent)) {
-		return totalAmount = `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
-	} else if (isNaN(contribution)) {
-		return totalAmount = `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
-	} else if (isNaN(amount)) {
-		return totalAmount = `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
-	} 	
-	let returnAmountBank = amount - contribution;	
-	let date1 = new Date();	
-	let diff = Date.parse(date) - Date.parse(date1);
-	let creditTerm = Math.ceil(diff / 1000 / 60 / 60 / 24 / 30.5);	
-	let P = percent / 12 / 100;
-	let monthlyFee = returnAmountBank * (P + (P / (((1 + P) ** creditTerm) - 1)));
-			totalAmount = creditTerm * monthlyFee;				
-    return Number(totalAmount.toFixed(2));	
+function calculateTotalMortgage(percent, contribution, amount, countMonths) {
+  let p = ( percent / 100 ) / 12;
+  let s = amount - contribution;
+  let n = countMonths;
+  let generalPayment = ((s * (p + (p / (((1 + p) ** n) - 1)))) * n).toFixed(2);
+  
+  return Number(generalPayment);
+  
 }
