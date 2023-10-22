@@ -1,14 +1,13 @@
-'use strict'
-
-function compareArrays(arr1, arr2) {
-  let result = arr1.length === arr2.length && arr1.every((number, item) => number === arr2[item]);
-
-  return result; // boolean
-}
-
-
-function advancedFilter(arr) {
-  let resultArr = arr.filter((item) => item > 0).filter((item) => item % 3 ===0).map((item) => item * 10);
-
-    return resultArr; // array
-}
+function compareArrays(arr1, arr2) {  
+    return (JSON.stringify(arr1) === JSON.stringify(arr2));
+  }
+  
+  function getUsersNamesInAgeRange(users, gender) {
+    return users.filter(user => user.gender === gender).map(result => result.age).reduce((summ, userAge, index, array) => {
+      summ += userAge;
+      if (index === array.length - 1) {
+        return summ / array.length;
+      }
+      return summ;
+    }, 0);
+  }
